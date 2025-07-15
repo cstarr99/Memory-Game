@@ -3,7 +3,7 @@ const shuffleBtn = document.querySelector("#shuffle-cards");
 const form = document.querySelector("#game-form");
 const gameUnit = Array.from(document.querySelectorAll(".game-unit"));
 
-//reset game back to nothing
+//resets game by hiding cards.
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
   gameUnit.forEach((unit) => {
@@ -11,31 +11,69 @@ submitBtn.addEventListener("click", (e) => {
   });
 });
 
-shuffleBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  gameUnit.forEach((unit) => {
-    unit.textContent = Math.floor(Math.random() * 9);
-    if (unit.textContent) {
-    }
-  });
-});
-
+//makes numbers appear on cards when clicked.
 document.addEventListener("click", (e) => {
   e.preventDefault();
   if (!e.target.matches(".game-unit")) return;
   e.target.classList.remove("hidden");
 });
 
-function turnCard(card) {}
-
-function randomizeCard(textContent) {}
-
-function addCheck() {
+//shuffles cards.
+shuffleBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  const shuffleGameNumbers = [];
   gameUnit.forEach((unit) => {
-    unit.filter((insideUnit) => {
-      console.log(insideUnit.textContent);
-    });
+    shuffleGameNumbers.push((unit.textContent = Math.floor(Math.random() * 9)));
   });
+  console.log(shuffleGameNumbers);
+
+  shuffleGameNumbers.forEach((unit) => {
+    const time = filterNumberOfTimes(shuffleGameNumbers, unit).length;
+    if (time === 2) {
+      console.log("times: " + time);
+      console.log("unit: " + unit);
+      console.log("perfect");
+    } else if (time === 1) {
+      console.log("times: " + time);
+      console.log("unit: " + unit);
+      console.log("too low");
+    } else {
+      console.log("times: " + time);
+      console.log("unit: " + unit);
+      console.log("too high");
+    }
+  });
+});
+
+//function that takes in an array and a number to check and filters to find how many times that number is in that array.
+function filterNumberOfTimes(arrayToFilter, numberToCheck) {
+  const numberOfTimes = arrayToFilter.filter(
+    (number) => number == numberToCheck
+  );
+  return numberOfTimes;
 }
 
-addCheck();
+// const shuffleGameNumbers = [];
+
+// gameUnit.forEach((unit) => {
+//   shuffleGameNumbers.push((unit.textContent = Math.floor(Math.random() * 9)));
+// });
+
+// console.log(shuffleGameNumbers);
+
+// shuffleGameNumbers.forEach((unit) => {
+//   const time = addCheck(unit).length;
+//   if (time === 2) {
+//     console.log("times: " + time);
+//     console.log("unit: " + unit);
+//     console.log("perfect");
+//   } else if (time === 1) {
+//     console.log("times: " + time);
+//     console.log("unit: " + unit);
+//     console.log("too low");
+//   } else {
+//     console.log("times: " + time);
+//     console.log("unit: " + unit);
+//     console.log("too high");
+//   }
+// });

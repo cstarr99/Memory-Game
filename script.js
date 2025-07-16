@@ -25,24 +25,20 @@ shuffleBtn.addEventListener("click", (e) => {
   gameUnit.forEach((unit) => {
     shuffleGameNumbers.push((unit.textContent = Math.floor(Math.random() * 9)));
   });
+
   console.log(shuffleGameNumbers);
 
   shuffleGameNumbers.forEach((unit) => {
-    const time = filterNumberOfTimes(shuffleGameNumbers, unit).length;
-    if (time === 2) {
-      console.log("times: " + time);
-      console.log("unit: " + unit);
-      console.log("perfect");
-    } else if (time === 1) {
-      console.log("times: " + time);
-      console.log("unit: " + unit);
-      console.log("too low");
+    let i = 0;
+    const timesInArray = filterNumberOfTimes(shuffleGameNumbers, unit).length;
+    if (timesInArray === 2) {
     } else {
-      console.log("times: " + time);
-      console.log("unit: " + unit);
-      console.log("too high");
+      console.log(shuffleGameNumbers[i]);
+      shuffleGameNumbers[i] = Math.floor(Math.random() * 9);
     }
+    i = i + 1;
   });
+  console.log(shuffleGameNumbers);
 });
 
 //function that takes in an array and a number to check and filters to find how many times that number is in that array.
@@ -52,28 +48,3 @@ function filterNumberOfTimes(arrayToFilter, numberToCheck) {
   );
   return numberOfTimes;
 }
-
-// const shuffleGameNumbers = [];
-
-// gameUnit.forEach((unit) => {
-//   shuffleGameNumbers.push((unit.textContent = Math.floor(Math.random() * 9)));
-// });
-
-// console.log(shuffleGameNumbers);
-
-// shuffleGameNumbers.forEach((unit) => {
-//   const time = addCheck(unit).length;
-//   if (time === 2) {
-//     console.log("times: " + time);
-//     console.log("unit: " + unit);
-//     console.log("perfect");
-//   } else if (time === 1) {
-//     console.log("times: " + time);
-//     console.log("unit: " + unit);
-//     console.log("too low");
-//   } else {
-//     console.log("times: " + time);
-//     console.log("unit: " + unit);
-//     console.log("too high");
-//   }
-// });

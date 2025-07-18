@@ -36,7 +36,6 @@ shuffleBtn.addEventListener("click", (e) => {
       console.log(shuffleGameNumbers[i]);
       shuffleGameNumbers[i] = Math.floor(Math.random() * 9);
     }
-    i = i + 1;
   });
   console.log(shuffleGameNumbers);
 });

@@ -19,31 +19,39 @@ document.addEventListener("click", (e) => {
 });
 
 //shuffles cards.
-shuffleBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  const shuffleGameNumbers = [];
-  gameUnit.forEach((unit) => {
-    shuffleGameNumbers.push((unit.textContent = Math.floor(Math.random() * 9)));
-  });
+// shuffleBtn.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   const shuffleGameNumbers = [];
+//   gameUnit.forEach((unit) => {
+//     shuffleGameNumbers.push((unit.textContent = Math.floor(Math.random() * 9)));
+//   });
 
-  console.log(shuffleGameNumbers);
+//   console.log(shuffleGameNumbers);
 
-  shuffleGameNumbers.forEach((unit) => {
-    let i = 0;
-    const timesInArray = filterNumberOfTimes(shuffleGameNumbers, unit).length;
-    if (timesInArray === 2) {
-    } else {
-      console.log(shuffleGameNumbers[i]);
-      shuffleGameNumbers[i] = Math.floor(Math.random() * 9);
-    }
-  });
-  console.log(shuffleGameNumbers);
-});
+//   shuffleGameNumbers.forEach((unit) => {
+//     let i = 0;
+//     const timesInArray = filterNumberOfTimes(shuffleGameNumbers, unit).length;
+//     if (timesInArray === 2) {
+//     } else {
+//       console.log(shuffleGameNumbers[i]);
+//       shuffleGameNumbers[i] = Math.floor(Math.random() * 9);
+//     }
+//   });
+//   console.log(shuffleGameNumbers);
+// });
 
 //function that takes in an array and a number to check and filters to find how many times that number is in that array.
-function filterNumberOfTimes(arrayToFilter, numberToCheck) {
-  const numberOfTimes = arrayToFilter.filter(
-    (number) => number == numberToCheck
-  );
-  return numberOfTimes;
-}
+// function filterNumberOfTimes(arrayToFilter, numberToCheck) {
+//   const numberOfTimes = arrayToFilter.filter(
+//     (number) => number == numberToCheck
+//   );
+//   return numberOfTimes;
+// }
+
+/*
+ *future things to add:
+ *number turns green when get two correct
+ *number turns red when get two incorrect
+ *after game is over give number correct(%)
+ *shuffle cards?
+ */

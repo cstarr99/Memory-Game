@@ -62,3 +62,11 @@ body {
 .submit:hover {
   filter: brightness(75%);
 }
+
+.correct {
+  background-color: green;
+}
+
+.incorrect {
+  background-color: red;
+}

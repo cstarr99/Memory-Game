@@ -8,6 +8,8 @@ submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
   gameUnit.forEach((unit) => {
     unit.classList.add("hidden");
+    unit.classList.remove("correct");
+    unit.classList.remove("incorrect");
   });
 });
 
@@ -16,7 +18,134 @@ document.addEventListener("click", (e) => {
   e.preventDefault();
   if (!e.target.matches(".game-unit")) return;
   e.target.classList.remove("hidden");
+  const showedUnits = gameUnit.filter((unit) => {
+    return !unit.classList.contains("hidden");
+  });
+  checkIfCardCorrect(showedUnits, 2);
+  if (showedUnits.length == 4) {
+    const newShowedUnits = showedUnits.slice(-2);
+    const isSameNumber = newShowedUnits.every((number) =>
+      number.isEqualNode(newShowedUnits[0])
+    );
+    if (isSameNumber) {
+      showedUnits.forEach((unit) => {
+        unit.classList.add("correct");
+      });
+    } else {
+      showedUnits.forEach((unit) => {
+        unit.classList.add("incorrect");
+      });
+    }
+  }
+  if (showedUnits.length == 6) {
+    const newShowedUnits = showedUnits.slice(-2);
+    const isSameNumber = newShowedUnits.every((number) =>
+      number.isEqualNode(newShowedUnits[0])
+    );
+    if (isSameNumber) {
+      showedUnits.forEach((unit) => {
+        unit.classList.add("correct");
+      });
+    } else {
+      showedUnits.forEach((unit) => {
+        unit.classList.add("incorrect");
+      });
+    }
+  }
+  if (showedUnits.length == 8) {
+    const newShowedUnits = showedUnits.slice(-2);
+    const isSameNumber = newShowedUnits.every((number) =>
+      number.isEqualNode(newShowedUnits[0])
+    );
+    if (isSameNumber) {
+      showedUnits.forEach((unit) => {
+        unit.classList.add("correct");
+      });
+    } else {
+      showedUnits.forEach((unit) => {
+        unit.classList.add("incorrect");
+      });
+    }
+  }
+  if (showedUnits.length == 10) {
+    const newShowedUnits = showedUnits.slice(-2);
+    const isSameNumber = newShowedUnits.every((number) =>
+      number.isEqualNode(newShowedUnits[0])
+    );
+    if (isSameNumber) {
+      showedUnits.forEach((unit) => {
+        unit.classList.add("correct");
+      });
+    } else {
+      showedUnits.forEach((unit) => {
+        unit.classList.add("incorrect");
+      });
+    }
+  }
+  if (showedUnits.length == 12) {
+    const newShowedUnits = showedUnits.slice(-2);
+    const isSameNumber = newShowedUnits.every((number) =>
+      number.isEqualNode(newShowedUnits[0])
+    );
+    if (isSameNumber) {
+      showedUnits.forEach((unit) => {
+        unit.classList.add("correct");
+      });
+    } else {
+      showedUnits.forEach((unit) => {
+        unit.classList.add("incorrect");
+      });
+    }
+  }
+  if (showedUnits.length == 14) {
+    const newShowedUnits = showedUnits.slice(-2);
+    const isSameNumber = newShowedUnits.every((number) =>
+      number.isEqualNode(newShowedUnits[0])
+    );
+    if (isSameNumber) {
+      showedUnits.forEach((unit) => {
+        unit.classList.add("correct");
+      });
+    } else {
+      showedUnits.forEach((unit) => {
+        unit.classList.add("incorrect");
+      });
+    }
+  }
+  if (showedUnits.length == 16) {
+    const newShowedUnits = showedUnits.slice(-2);
+    const isSameNumber = newShowedUnits.every((number) =>
+      number.isEqualNode(newShowedUnits[0])
+    );
+    if (isSameNumber) {
+      showedUnits.forEach((unit) => {
+        unit.classList.add("correct");
+      });
+    } else {
+      showedUnits.forEach((unit) => {
+        unit.classList.add("incorrect");
+      });
+    }
+  }
 });
+
+function checkIfCardCorrect(showedUnits, cardPairNumber) {
+  if (showedUnits.length == cardPairNumber) {
+    const newShowedUnits = showedUnits.slice(-2);
+    const isSameNumber = newShowedUnits.every((number) =>
+      number.isEqualNode(newShowedUnits[0])
+    );
+    if (isSameNumber) {
+      showedUnits.forEach((unit) => {
+        unit.classList.add("correct");
+      });
+    } else {
+      showedUnits.forEach((unit) => {
+        unit.classList.add("incorrect");
+      });
+    }
+  }
+}
 
 //shuffles cards.
 // shuffleBtn.addEventListener("click", (e) => {

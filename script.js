@@ -2,7 +2,7 @@ const submitBtn = document.querySelector("#reset-game");
 const shuffleBtn = document.querySelector("#shuffle-cards");
 const form = document.querySelector("#game-form");
 const gameUnit = Array.from(document.querySelectorAll(".game-unit"));
-
+let showedUnits = [];
 //resets game by hiding cards.
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -16,134 +16,36 @@ submitBtn.addEventListener("click", (e) => {
 //makes numbers appear on cards when clicked.
 document.addEventListener("click", (e) => {
   e.preventDefault();
+  showedUnits = [];
   if (!e.target.matches(".game-unit")) return;
   e.target.classList.remove("hidden");
-  const showedUnits = gameUnit.filter((unit) => {
-    return !unit.classList.contains("hidden");
+  gameUnit.forEach((unit) => {
+    if (
+      !unit.classList.contains("hidden") &&
+      !unit.classList.contains("correct") &&
+      !unit.classList.contains("incorrect")
+    ) {
+      showedUnits.push(unit);
+    }
   });
-  checkIfCardCorrect(showedUnits, 2);
-  if (showedUnits.length == 4) {
-    const newShowedUnits = showedUnits.slice(-2);
-    const isSameNumber = newShowedUnits.every((number) =>
-      number.isEqualNode(newShowedUnits[0])
-    );
-    if (isSameNumber) {
-      showedUnits.forEach((unit) => {
-        unit.classList.add("correct");
-      });
-    } else {
-      showedUnits.forEach((unit) => {
-        unit.classList.add("incorrect");
-      });
-    }
-  }
-  if (showedUnits.length == 6) {
-    const newShowedUnits = showedUnits.slice(-2);
-    const isSameNumber = newShowedUnits.every((number) =>
-      number.isEqualNode(newShowedUnits[0])
-    );
-    if (isSameNumber) {
-      showedUnits.forEach((unit) => {
-        unit.classList.add("correct");
-      });
-    } else {
-      showedUnits.forEach((unit) => {
-        unit.classList.add("incorrect");
-      });
-    }
-  }
-  if (showedUnits.length == 8) {
-    const newShowedUnits = showedUnits.slice(-2);
-    const isSameNumber = newShowedUnits.every((number) =>
-      number.isEqualNode(newShowedUnits[0])
-    );
-    if (isSameNumber) {
-      showedUnits.forEach((unit) => {
-        unit.classList.add("correct");
-      });
-    } else {
-      showedUnits.forEach((unit) => {
-        unit.classList.add("incorrect");
-      });
-    }
-  }
-  if (showedUnits.length == 10) {
-    const newShowedUnits = showedUnits.slice(-2);
-    const isSameNumber = newShowedUnits.every((number) =>
-      number.isEqualNode(newShowedUnits[0])
-    );
-    if (isSameNumber) {
-      showedUnits.forEach((unit) => {
-        unit.classList.add("correct");
-      });
-    } else {
-      showedUnits.forEach((unit) => {
-        unit.classList.add("incorrect");
-      });
-    }
-  }
-  if (showedUnits.length == 12) {
-    const newShowedUnits = showedUnits.slice(-2);
-    const isSameNumber = newShowedUnits.every((number) =>
-      number.isEqualNode(newShowedUnits[0])
-    );
-    if (isSameNumber) {
-      showedUnits.forEach((unit) => {
-        unit.classList.add("correct");
-      });
-    } else {
-      showedUnits.forEach((unit) => {
-        unit.classList.add("incorrect");
-      });
-    }
-  }
-  if (showedUnits.length == 14) {
-    const newShowedUnits = showedUnits.slice(-2);
-    const isSameNumber = newShowedUnits.every((number) =>
-      number.isEqualNode(newShowedUnits[0])
-    );
-    if (isSameNumber) {
-      showedUnits.forEach((unit) => {
-        unit.classList.add("correct");
-      });
-    } else {
-      showedUnits.forEach((unit) => {
-        unit.classList.add("incorrect");
-      });
-    }
-  }
-  if (showedUnits.length == 16) {
-    const newShowedUnits = showedUnits.slice(-2);
-    const isSameNumber = newShowedUnits.every((number) =>
-      number.isEqualNode(newShowedUnits[0])
-    );
-    if (isSameNumber) {
-      showedUnits.forEach((unit) => {
-        unit.classList.add("correct");
-      });
-    } else {
-      showedUnits.forEach((unit) => {
-        unit.classList.add("incorrect");
-      });
-    }
+  if (showedUnits.length == 2) {
+    checkIfCardCorrect(showedUnits);
   }
 });
 
-function checkIfCardCorrect(showedUnits, cardPairNumber) {
-  if (showedUnits.length == cardPairNumber) {
-    const newShowedUnits = showedUnits.slice(-2);
-    const isSameNumber = newShowedUnits.every((number) =>
-      number.isEqualNode(newShowedUnits[0])
-    );
-    if (isSameNumber) {
-      showedUnits.forEach((unit) => {
-        unit.classList.add("correct");
-      });
-    } else {
-      showedUnits.forEach((unit) => {
-        unit.classList.add("incorrect");
-      });
-    }
+function checkIfCardCorrect(showedUnits) {
+  const LastTwoShowedUnits = showedUnits.slice(-2);
+  const isSameNumber = LastTwoShowedUnits.every((number) =>
+    number.isEqualNode(LastTwoShowedUnits[0])
+  );
+  if (isSameNumber) {
+    LastTwoShowedUnits.forEach((unit) => {
+      unit.classList.add("correct");
+    });
+  } else {
+    LastTwoShowedUnits.forEach((unit) => {
+      unit.classList.add("incorrect");
+    });
   }
 }
 
@@ -179,8 +81,6 @@ function checkIfCardCorrect(showedUnits, cardPairNumber) {
 
 /*
  *future things to add:
- *number turns green when get two correct
- *number turns red when get two incorrect
  *after game is over give number correct(%)
  *shuffle cards?
  */

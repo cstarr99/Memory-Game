@@ -16,6 +16,7 @@ submitBtn.addEventListener("click", (e) => {
 //makes numbers appear on cards when clicked.
 document.addEventListener("click", (e) => {
   e.preventDefault();
+  console.clear();
   showedUnits = [];
   if (!e.target.matches(".game-unit")) return;
   e.target.classList.remove("hidden");
@@ -33,22 +34,33 @@ document.addEventListener("click", (e) => {
   }
 });
 
+//checks to see if the two cards in showedUnits array are the same and makes them red/green if they are correct/incorrect
 function checkIfCardCorrect(showedUnits) {
-  const LastTwoShowedUnits = showedUnits.slice(-2);
-  const isSameNumber = LastTwoShowedUnits.every((number) =>
-    number.isEqualNode(LastTwoShowedUnits[0])
+  const isSameNumber = showedUnits.every((number) =>
+    number.isEqualNode(showedUnits[0])
   );
   if (isSameNumber) {
-    LastTwoShowedUnits.forEach((unit) => {
+    showedUnits.forEach((unit) => {
       unit.classList.add("correct");
     });
   } else {
-    LastTwoShowedUnits.forEach((unit) => {
+    showedUnits.forEach((unit) => {
       unit.classList.add("incorrect");
     });
   }
+  showScore();
 }
 
+//show the percentage correct
+function showScore() {
+  const numberCorrectArr = gameUnit.filter((unit) =>
+    unit.classList.contains("correct")
+  );
+  const numberCorrect = numberCorrectArr.length / 2;
+  const total = 8;
+  const score = `${numberCorrect} out of ${total}`;
+  console.log(score);
+}
 //shuffles cards.
 // shuffleBtn.addEventListener("click", (e) => {
 //   e.preventDefault();
@@ -81,6 +93,6 @@ function checkIfCardCorrect(showedUnits) {
 
 /*
  *future things to add:
- *after game is over give number correct(%)
+ *after game is over give number correct(%)/congrat screen
  *shuffle cards?
  */

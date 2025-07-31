@@ -70,3 +70,39 @@ body {
 .incorrect {
   background-color: red;
 }
+
+.modal {
+  z-index: 1;
+  background-color: black;
+  height: 45vh;
+  width: 35vw;
+  position: absolute;
+  top: 30%;
+  right: 32.5%;
+  border-radius: 3%;
+}
+
+.modal-title {
+  text-align: center;
+  color: white;
+  font-size: 3rem;
+  margin-top: 25px;
+}
+
+.score-text {
+  color: white;
+  text-align: center;
+  font-size: 5rem;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.close-modal-button {
+  background-color: rgb(89, 84, 84);
+  width: 10%;
+  height: auto;
+}
+
+.close-modal-button:hover {
+  background-color: rgb(227, 52, 52);
+}

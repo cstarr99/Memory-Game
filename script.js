@@ -2,7 +2,11 @@ const submitBtn = document.querySelector("#reset-game");
 const shuffleBtn = document.querySelector("#shuffle-cards");
 const form = document.querySelector("#game-form");
 const gameUnit = Array.from(document.querySelectorAll(".game-unit"));
+const modal = document.querySelector(".modal");
+const scoreText = document.querySelector(".score-text");
+const closeModalBtn = document.querySelector(".close-modal-button");
 let showedUnits = [];
+
 //resets game by hiding cards.
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -34,6 +38,11 @@ document.addEventListener("click", (e) => {
   }
 });
 
+//closes score modal when clicked
+closeModalBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
 //checks to see if the two cards in showedUnits array are the same and makes them red/green if they are correct/incorrect
 function checkIfCardCorrect(showedUnits) {
   const isSameNumber = showedUnits.every((number) =>
@@ -48,10 +57,15 @@ function checkIfCardCorrect(showedUnits) {
       unit.classList.add("incorrect");
     });
   }
-  showScore();
+  const isGameDone = gameUnit.some((unit) => {
+    return unit.classList.contains("hidden");
+  });
+  if (!isGameDone) {
+    showScore();
+  }
 }
 
-//show the percentage correct
+//show the amount correct
 function showScore() {
   const numberCorrectArr = gameUnit.filter((unit) =>
     unit.classList.contains("correct")
@@ -59,7 +73,8 @@ function showScore() {
   const numberCorrect = numberCorrectArr.length / 2;
   const total = 8;
   const score = `${numberCorrect} out of ${total}`;
-  console.log(score);
+  scoreText.innerText = score;
+  modal.style.display = "block";
 }
 //shuffles cards.
 // shuffleBtn.addEventListener("click", (e) => {

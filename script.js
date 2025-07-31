@@ -72,10 +72,10 @@ function checkIfCardCorrect(showedUnits) {
       unit.classList.add("incorrect");
     });
   }
-  const isGameDone = gameUnit.some((unit) => {
-    return unit.classList.contains("hidden");
+  const isGameDone = gameUnit.every((unit) => {
+    return !unit.classList.contains("hidden");
   });
-  if (!isGameDone) {
+  if (isGameDone) {
     showScore();
   }
 }

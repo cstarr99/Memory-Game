@@ -1,14 +1,15 @@
-const submitBtn = document.querySelector("#reset-game");
+const resetBtn = document.querySelector("#reset-game");
 const shuffleBtn = document.querySelector("#shuffle-cards");
 const form = document.querySelector("#game-form");
 const gameUnit = Array.from(document.querySelectorAll(".game-unit"));
 const modal = document.querySelector(".modal");
 const scoreText = document.querySelector(".score-text");
 const closeModalBtn = document.querySelector(".close-modal-button");
+const gameContainer = document.querySelector(".game-container");
 let showedUnits = [];
 
 //resets game by hiding cards.
-submitBtn.addEventListener("click", (e) => {
+resetBtn.addEventListener("click", (e) => {
   e.preventDefault();
   gameUnit.forEach((unit) => {
     unit.classList.add("hidden");
@@ -19,10 +20,9 @@ submitBtn.addEventListener("click", (e) => {
 
 //makes numbers appear on cards when clicked.
 document.addEventListener("click", (e) => {
-  e.preventDefault();
-  console.clear();
-  showedUnits = [];
   if (!e.target.matches(".game-unit")) return;
+  e.preventDefault();
+  showedUnits = [];
   e.target.classList.remove("hidden");
   gameUnit.forEach((unit) => {
     if (
@@ -38,8 +38,23 @@ document.addEventListener("click", (e) => {
   }
 });
 
+//resets and shuffles cards
+shuffleBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  gameUnit.forEach((unit) => {
+    unit.classList.add("hidden");
+    unit.classList.remove("correct");
+    unit.classList.remove("incorrect");
+  });
+  const shuffledCards = shuffleCards();
+  for (let i = 0; i < gameUnit.length; i++) {
+    gameUnit[i].innerText = shuffledCards[i];
+  }
+});
+
 //closes score modal when clicked
-closeModalBtn.addEventListener("click", () => {
+closeModalBtn.addEventListener("click", (e) => {
+  e.preventDefault();
   modal.style.display = "none";
 });
 
@@ -76,38 +91,14 @@ function showScore() {
   scoreText.innerText = score;
   modal.style.display = "block";
 }
-//shuffles cards.
-// shuffleBtn.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   const shuffleGameNumbers = [];
-//   gameUnit.forEach((unit) => {
-//     shuffleGameNumbers.push((unit.textContent = Math.floor(Math.random() * 9)));
-//   });
-
-//   console.log(shuffleGameNumbers);
-
-//   shuffleGameNumbers.forEach((unit) => {
-//     let i = 0;
-//     const timesInArray = filterNumberOfTimes(shuffleGameNumbers, unit).length;
-//     if (timesInArray === 2) {
-//     } else {
-//       console.log(shuffleGameNumbers[i]);
-//       shuffleGameNumbers[i] = Math.floor(Math.random() * 9);
-//     }
-//   });
-//   console.log(shuffleGameNumbers);
-// });
-
-//function that takes in an array and a number to check and filters to find how many times that number is in that array.
-// function filterNumberOfTimes(arrayToFilter, numberToCheck) {
-//   const numberOfTimes = arrayToFilter.filter(
-//     (number) => number == numberToCheck
-//   );
-//   return numberOfTimes;
-// }
-
-/*
- *future things to add:
- *after game is over give number correct(%)/congrat screen
- *shuffle cards?
- */
+//shuffles cards
+function shuffleCards() {
+  let gameUnitText = gameUnit.map((unit) => unit.textContent);
+  for (let i = 0; i < gameUnitText.length; i++) {
+    let temp = gameUnitText[i];
+    let r = Math.floor(Math.random() * gameUnitText.length);
+    gameUnitText[i] = gameUnitText[r];
+    gameUnitText[r] = temp;
+  }
+  return gameUnitText;
+}
